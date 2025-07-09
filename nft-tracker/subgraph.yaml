@@ -29,4 +29,6 @@ dataSources:
           handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransferToken
       file: ./src/my-nft.ts

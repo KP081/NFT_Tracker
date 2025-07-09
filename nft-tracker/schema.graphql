@@ -18,7 +18,7 @@ type ApprovalForAll @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Transfer @entity(immutable: true) {
+type TransferEntity @entity(immutable: true) {
   id: Bytes!
   from: Bytes! # address
   to: Bytes! # address
@@ -28,8 +28,8 @@ type Transfer @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Token @entity {
+type Token @entity(immutable: false) {
   id: ID!
   owner: Bytes!
-  tokenID: BigInt!
+  tokenId: BigInt!
 }
