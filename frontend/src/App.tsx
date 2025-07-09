@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+// import { ethers } from "ethers";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./apollo";
+import NFTList from "./components/NFTList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [address, setAddress] = useState<string>("");
+
+  useEffect(() => {
+    async function connectWallet() {
+      if ((window as any).ethereum) {
+        const accounts = await (window as any).ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        setAddress(accounts[0]);
+      }
+    }
+    connectWallet();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ApolloProvider client={client}>
+      <div className="min-h-screen bg-gray-100 p-8">
+        <h1 className="text-3xl font-bold mb-4">NFT Tracker Dashboard</h1>
+        {address ? (
+          <div>
+            <p className="mb-2 text-gray-600">Wallet: {address}</p>
+            <NFTList owner={address} />
+          </div>
+        ) : (
+          <p>Please connect MetaMask</p>
+        )}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </ApolloProvider>
+  );
 }
 
-export default App
+export default App;
