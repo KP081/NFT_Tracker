@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: MyNFT
-    network: mainnet
+    network: sepolia
     source:
       address: "0x15B8092db1a9fBB4001c46eD2a191E764C1Ab59f"
       abi: MyNFT
