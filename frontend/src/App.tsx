@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo";
 import NFTList from "./components/NFTList";
+import "./App.css";
 
 function App() {
   const [address, setAddress] = useState<string>("");

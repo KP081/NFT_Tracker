@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { GET_NFTS } from "../queries";
+import '../App.css';
 
 type Props = {
   owner: string;
